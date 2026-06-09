@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" routerLink="/">
+      <span class="brand__mark">SC</span>
+      <span class="brand__name">Sportscertify</span>
+    </a>
+    <nav class="site-nav">
+      <a routerLink="/feed" routerLinkActive="is-active">Feed</a>
+      <a href="https://sportscertify.com" class="muted">Courses</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container site-main">
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="muted">
+      Sportscertify — the network for certified sports professionals.
+      World Cup 2026 insights, semantic search, and verified credentials.
+    </p>
+    <p class="muted">© {{ year }} Sportscertify · Built on MongoDB Atlas + Gemini.</p>
+  </div>
+</footer>

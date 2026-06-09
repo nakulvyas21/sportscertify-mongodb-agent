@@ -1,0 +1,54 @@
+{
+  "name": "sportscertify-social",
+  "version": "1.0.0",
+  "description": "A specialized social network for certified sports professionals, featuring a Gemini-powered World Cup 2026 Talent & Content Discovery Agent over MongoDB Atlas Vector Search via the official Model Context Protocol (MCP).",
+  "main": "dist/api/server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/api/server.js",
+    "dev": "tsx watch src/api/server.ts",
+    "seed": "tsx src/scripts/seed.ts",
+    "create-index": "tsx src/scripts/createVectorIndex.ts",
+    "search": "tsx src/scripts/searchDemo.ts",
+    "mcp": "tsx src/scripts/runMcpServer.ts",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "mongodb",
+    "atlas-vector-search",
+    "voyage-ai",
+    "gemini",
+    "model-context-protocol",
+    "mcp",
+    "world-cup-2026",
+    "sports-science"
+  ],
+  "author": "Sportscertify",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^6.1.3",
+    "@google-cloud/vertexai": "^1.12.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^6.13.0",
+    "voyageai": "^0.3.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.13.0",
+    "tsx": "^4.22.4",
+    "typescript": "^5.7.3"
+  }
+}

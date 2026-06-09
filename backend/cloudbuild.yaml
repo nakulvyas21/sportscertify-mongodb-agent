@@ -1,0 +1,51 @@
+# Cloud Build → Artifact Registry → Cloud Run for the social API.
+# Secrets (connection string, API keys) are injected as Cloud Run env vars /
+# Secret Manager references — NEVER baked into the image.
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker pull gcr.io/$PROJECT_ID/sportscertify-social-api:latest || exit 0'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--cache-from'
+      - 'gcr.io/$PROJECT_ID/sportscertify-social-api:latest'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/sportscertify-social-api:latest'
+      - '-f'
+      - 'Dockerfile'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/sportscertify-social-api:latest'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'sportscertify-social-api'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/sportscertify-social-api:latest'
+      - '--region'
+      - 'europe-west3'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      # Non-secret config inline. IS_PRODUCTION=true makes the app resolve
+      # sensitive values from Secret Manager itself, using the kebab-case secret
+      # names mdb-connection-string / voyage-api-key / jwt-signing-key. The Cloud
+      # Run runtime service account must hold roles/secretmanager.secretAccessor.
+      - '--set-env-vars'
+      - 'IS_PRODUCTION=true,GCP_PROJECT_ID=your-gcp-project,GOOGLE_CLOUD_PROJECT=your-gcp-project,GOOGLE_CLOUD_LOCATION=us-central1,AI_MODEL=gemini-2.5-flash,MDB_DATABASE_NAME=sportscertify_social,MDB_MCP_READ_ONLY=true,VOYAGE_MODEL=voyage-4-large,VOYAGE_EMBED_DIM=1024,VECTOR_INDEX_NAME=posts_content_vector_index,CORS_ALLOWED_ORIGINS=https://sportscertify.com,https://www.sportscertify.com'
+
+images:
+  - 'gcr.io/$PROJECT_ID/sportscertify-social-api:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

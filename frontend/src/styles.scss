@@ -1,0 +1,99 @@
+/* Sportscertify Social — global styles */
+
+:root {
+  --bg: #0b1020;
+  --surface: #151b2e;
+  --surface-2: #1d2540;
+  --border: #2a3354;
+  --text: #e7ecf6;
+  --text-dim: #9aa6c4;
+  --accent: #3ddc97;
+  --accent-2: #4f8cff;
+  --danger: #ff6b6b;
+  --radius: 14px;
+  --maxw: 720px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 0.4em;
+}
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+.chip--accent {
+  color: #08231a;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.tag {
+  color: var(--accent-2);
+  font-size: 13px;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.muted {
+  color: var(--text-dim);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

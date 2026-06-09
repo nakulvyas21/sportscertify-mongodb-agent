@@ -1,0 +1,26 @@
+{
+  "name": "posts_content_vector_index",
+  "type": "vectorSearch",
+  "definition": {
+    "fields": [
+      {
+        "type": "vector",
+        "path": "content_embedding",
+        "numDimensions": 1024,
+        "similarity": "cosine"
+      },
+      {
+        "type": "filter",
+        "path": "post_type"
+      },
+      {
+        "type": "filter",
+        "path": "tags"
+      },
+      {
+        "type": "filter",
+        "path": "author_role"
+      }
+    ]
+  }
+}
